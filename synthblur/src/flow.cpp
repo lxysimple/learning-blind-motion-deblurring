@@ -198,6 +198,7 @@ cv::Mat Flow::shift(const cv::Mat &img, float ratio) {
     return shifted_img;
 }
 
+// 感觉这个代码有问题，同一个光流累加多次没啥特殊含义
 cv::Mat Flow::blur(const cv::Mat &img, std::vector<float> ratios) {
     cv::cuda::GpuMat planes[2];
     cv::cuda::split(get(), planes);
