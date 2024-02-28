@@ -117,7 +117,7 @@ cv::Vec3b Flow::computeColor(float fx, float fy) {
     return pix;
 }
 
-
+// 返回可视化后的光流图像，细节略
 cv::Mat Flow::visualize() {
     cv::cuda::GpuMat planes[2];
     cv::cuda::split(motion, planes);
