@@ -47,7 +47,9 @@ int main(int argc, char const *argv[])
         // cyclic get frames
         before_frame = sharp_frame.clone();
         sharp_frame = after_frame.clone();
-        video >> after_frame; after_frame = scale(after_frame, scaling_factor);
+        
+        video >> after_frame; 
+        after_frame = scale(after_frame, scaling_factor);
 
         // estimate FLOW
         before_flow.compute(sharp_frame, before_frame);
