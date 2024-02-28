@@ -78,6 +78,7 @@ void Flow::initColorWheel() {
         colorWheel[k] = cv::Vec3i(255, 0, 255 - 255 * i / MR);
 }
 
+// 根据光流的方向（fx 和 fy）计算光流的颜色，细节略
 cv::Vec3b Flow::computeColor(float fx, float fy) {
 
     const int RY = 15;
