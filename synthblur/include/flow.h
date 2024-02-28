@@ -11,9 +11,10 @@
 class Flow {
   cv::Mat anchor;
   cv::cuda::GpuMat motion;
+  // 一个指向光流对象的指针
   cv::Ptr<cv::cuda::FarnebackOpticalFlow> flow_estimator;
 
-  cv::Vec3i colorWheel[55];
+  cv::Vec3i colorWheel[55]; // 一个三元素对象，一般用于装RBG
 
  public:
   Flow();
