@@ -21,6 +21,7 @@ Flow::Flow() {
 
 }
 
+// 计算a b之间的光流图
 void Flow::compute(cv::Mat a, cv::Mat b) {
     anchor = a;
 
