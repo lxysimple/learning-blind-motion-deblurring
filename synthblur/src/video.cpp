@@ -10,6 +10,7 @@ VideoReader::VideoReader(std::string fn) : hnd(fn), path(fn) {
 
 }
 
+// 跳到视频流的某帧处
 void VideoReader::jump(unsigned int idx) {
   hnd.set(CV_CAP_PROP_POS_FRAMES, idx);
   std::cout << "jump to frame " << frame() << std::endl;
@@ -22,7 +23,7 @@ unsigned int  VideoReader::height() const { return hnd.get(CV_CAP_PROP_FRAME_HEI
 unsigned int VideoReader::frames() const { return hnd.get(CV_CAP_PROP_FRAME_COUNT);}
 unsigned int VideoReader::frame() const { return hnd.get(CV_CAP_PROP_POS_FRAMES);}
 
-
+// >> 表示在流中取出1帧
 VideoReader& VideoReader::operator >> (cv::Mat& matrix) {
   hnd >> matrix;
   return *this;
@@ -35,9 +36,10 @@ VideoWriter::VideoWriter(std::string fn, const int width, const int height, cons
   std::cout << "write video " << fn << std::endl
             << "  fps:    " << fps << std::endl
             << "  shapes: H:" << height << " W:" << width << std::endl;
-  hnd.open(fn, codec, fps, S, true);
+  hnd.open(fn, codec, fps, S, true); // 打开视频，生成视频流
 }
 
+// 将1帧写入流
 VideoWriter& VideoWriter::operator << (const cv::Mat& matrix) {
   cv::Mat frame;
   matrix.convertTo(frame, CV_8UC3);

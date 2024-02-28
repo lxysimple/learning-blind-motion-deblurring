@@ -11,7 +11,7 @@
 
 class VideoReader {
   std::string path;
-  cv::VideoCapture hnd;
+  cv::VideoCapture hnd; // 视频流对象
  public:
   VideoReader(std::string fn);
 

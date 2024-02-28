@@ -10,7 +10,7 @@
 
 class Flow {
   cv::Mat anchor;
-  cv::cuda::GpuMat motion;
+  cv::cuda::GpuMat motion; // 运动光流图
   // 一个指向光流对象的指针
   cv::Ptr<cv::cuda::FarnebackOpticalFlow> flow_estimator;
 

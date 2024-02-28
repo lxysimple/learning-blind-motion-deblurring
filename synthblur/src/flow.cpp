@@ -6,6 +6,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 
 Flow::Flow() {
+    // 定义光流图的初始参数
     int     numLevels = 3;
     double  pyrScale = 0.5;
     bool    fastPyramids = false;
@@ -16,31 +17,37 @@ Flow::Flow() {
     int     flags = 0;
     flow_estimator = cv::cuda::FarnebackOpticalFlow::create(numLevels, pyrScale, fastPyramids, winSize, numIters, polyN, polySigma, flags);
 
-    initColorWheel();
+    initColorWheel(); // 初始化
 
 }
 
 void Flow::compute(cv::Mat a, cv::Mat b) {
     anchor = a;
 
+    // 图像 a 和 b 转换为灰度图像，分别存储到 ag 和 bg 中
     cv::Mat ag, bg;
     cv::cvtColor(a, ag, CV_BGR2GRAY);
     cv::cvtColor(b, bg, CV_BGR2GRAY);
 
+    // 转换为cuda加速的对象
     cv::cuda::GpuMat ad(ag);
     cv::cuda::GpuMat bd(bg);
 
-    motion.create(a.size(), CV_32FC2);
+    motion.create(a.size(), CV_32FC2); // 创建一个尺寸和a一样的对象存储光流
+
+    // 计算图像 a 和 b 之间的光流，结果存储在 motion
     flow_estimator->calc(ad, bd, motion);
 
 }
 
+// 检查光流向量是否合法
+// 如果光流向量的水平和垂直分量均不是 NaN，并且它们的绝对值均小于 1e9，则函数返回 true
 bool Flow::isFlowCorrect(cv::Point2f u) {
     return !cvIsNaN(u.x) && !cvIsNaN(u.y) && fabs(u.x) < 1e9 && fabs(u.y) < 1e9;
 }
 
 
-
+// 用于可视化光流图
 void Flow::initColorWheel() {
     int k = 0;
     const int RY = 15;
@@ -146,7 +153,7 @@ cv::Mat Flow::visualize() {
 }
 
 
-
+// 根据光流图变化图像
 cv::Mat Flow::shift(const cv::Mat &img, float ratio) {
     cv::cuda::GpuMat planes[2];
     cv::cuda::split(get(), planes);

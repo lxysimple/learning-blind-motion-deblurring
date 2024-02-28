@@ -2,6 +2,8 @@
 #include "blur.h"
 #include "meta.h"
 
+
+// 基于光流图生成变化后的帧
 Blur::Blur() {} // 在类外定义初始化函数
 
 // 类外定义成员函数
