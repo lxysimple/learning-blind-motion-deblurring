@@ -16,9 +16,10 @@ int main(int argc, char const *argv[])
     }
     std::string video_path = argv[1];
 
-    const int steps = 20;
-    const float scaling_factor = 0.5;
+    const int steps = 20; // 20帧生成一个模糊帧
+    const float scaling_factor = 0.5; // 每帧尺寸缩小一半
 
+    // 距离中心帧越远，其基于光流变化越大
     std::vector<float> ratios_before = linspace(1., 0., steps); ratios_before.pop_back();
     std::vector<float> ratios_after = linspace(0., 1., steps); pop_front(ratios_after);
 
@@ -26,9 +27,13 @@ int main(int argc, char const *argv[])
     std::cout << "simulate video with " << video.fps() * (1 + steps) << " fps" << std::endl;
 
     cv::Mat before_frame, sharp_frame, after_frame;
-    video >> sharp_frame; sharp_frame = scale(sharp_frame, scaling_factor);
-    video >> after_frame; after_frame = scale(after_frame, scaling_factor);
+    video >> sharp_frame; 
+    sharp_frame = scale(sharp_frame, scaling_factor);
 
+    video >> after_frame; 
+    after_frame = scale(after_frame, scaling_factor);
+
+    // 计算相隔两帧间的光流，存入motion
     Flow before_flow, after_flow;
     before_flow.compute(sharp_frame, after_frame);
 

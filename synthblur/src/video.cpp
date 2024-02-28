@@ -2,6 +2,7 @@
 #include <iostream>
 #include "video.h"
 
+// 用fn初始化hnd，path
 VideoReader::VideoReader(std::string fn) : hnd(fn), path(fn) {
   std::cout << "read video " << fn << std::endl
             << "  fps:    " << fps() << std::endl
