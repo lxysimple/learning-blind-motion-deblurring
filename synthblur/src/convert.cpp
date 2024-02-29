@@ -16,7 +16,7 @@ int main(int argc, char const *argv[])
     }
     std::string video_path = argv[1];
 
-    const int steps = 20; // 20帧生成一个模糊帧
+    const int steps = 20; // 在两帧间基于光流生成20个子帧
     const float scaling_factor = 0.5; // 每帧尺寸缩小一半
 
     // 距离中心帧越远，其基于光流变化越大
@@ -47,7 +47,7 @@ int main(int argc, char const *argv[])
         // cyclic get frames
         before_frame = sharp_frame.clone();
         sharp_frame = after_frame.clone();
-        
+
         video >> after_frame; 
         after_frame = scale(after_frame, scaling_factor);
 
@@ -58,9 +58,11 @@ int main(int argc, char const *argv[])
         // create blur
         std::vector<cv::Mat> subframes;
         int c = 0;
+        // (i-1, i)间
         for( auto ratio : ratios_before){
           subframes.push_back(before_flow.shift(sharp_frame, ratio));
         }
+        // (i, i+1)间
         for( auto ratio : ratios_after){
           subframes.push_back(after_flow.shift(sharp_frame, ratio));
         }

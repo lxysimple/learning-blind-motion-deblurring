@@ -138,7 +138,7 @@ cv::Mat Flow::visualize() {
             cv::Point2f u(flowxx(y, x), flowyy(y, x));
             if (!isFlowCorrect(u))
                 continue;
-            maxrad = std::max(maxrad, sqrt(u.x * u.x + u.y * u.y));
+            maxrad = std::max(maxrad*1.0, sqrt(u.x * u.x + u.y * u.y)*1.0);
         }
     }
 
