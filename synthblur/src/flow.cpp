@@ -27,8 +27,11 @@ void Flow::compute(cv::Mat a, cv::Mat b) {
 
     // 图像 a 和 b 转换为灰度图像，分别存储到 ag 和 bg 中
     cv::Mat ag, bg;
-    cv::cvtColor(a, ag, CV_BGR2GRAY);
-    cv::cvtColor(b, bg, CV_BGR2GRAY);
+    // cv::cvtColor(a, ag, CV_BGR2GRAY);
+    // cv::cvtColor(b, bg, CV_BGR2GRAY);
+    cv::cvtColor(a, ag, cv::COLOR_BGR2GRAY);
+    cv::cvtColor(b, bg, cv::COLOR_BGR2GRAY);
+
 
     // 转换为cuda加速的对象
     cv::cuda::GpuMat ad(ag);
