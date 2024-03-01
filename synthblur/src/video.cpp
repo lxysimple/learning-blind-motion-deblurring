@@ -54,7 +54,7 @@ VideoWriter::VideoWriter(std::string fn, const int width, const int height, cons
 VideoWriter& VideoWriter::operator << (const cv::Mat& matrix) {
   cv::Mat frame;
   // matrix.convertTo(frame, CV_8UC3);
-  matrix.convertTo(frame, cv::CV_8UC3);
+  matrix.convertTo(frame, CV_8UC3);
   hnd << frame;
   return *this;
 }
