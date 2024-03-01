@@ -41,7 +41,7 @@ VideoReader& VideoReader::operator >> (cv::Mat& matrix) {
 
 VideoWriter::VideoWriter(std::string fn, const int width, const int height, const float fps) {
   // codec = CV_FOURCC('m', 'p', '4', 'v');
-  codec = VideoWriter::fourcc('m', 'p', '4', 'v');
+  codec = cv::VideoWriter::fourcc('m', 'p', '4', 'v');
   
   cv::Size S = cv::Size(width, height);
   std::cout << "write video " << fn << std::endl
