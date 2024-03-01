@@ -13,16 +13,24 @@ VideoReader::VideoReader(std::string fn) : hnd(fn), path(fn) {
 
 // 跳到视频流的某帧处
 void VideoReader::jump(unsigned int idx) {
-  hnd.set(CV_CAP_PROP_POS_FRAMES, idx);
+  // hnd.set(CV_CAP_PROP_POS_FRAMES, idx);
+  hnd.set(CAP_PROP_POS_FRAMES, idx);
   std::cout << "jump to frame " << frame() << std::endl;
 
 }
 
-double VideoReader::fps() const { return hnd.get(CV_CAP_PROP_FPS);}
-unsigned int  VideoReader::width() const { return hnd.get(CV_CAP_PROP_FRAME_WIDTH);}
-unsigned int  VideoReader::height() const { return hnd.get(CV_CAP_PROP_FRAME_HEIGHT);}
-unsigned int VideoReader::frames() const { return hnd.get(CV_CAP_PROP_FRAME_COUNT);}
-unsigned int VideoReader::frame() const { return hnd.get(CV_CAP_PROP_POS_FRAMES);}
+// double VideoReader::fps() const { return hnd.get(CV_CAP_PROP_FPS);}
+double VideoReader::fps() const { return hnd.get(CAP_PROP_FPS);}
+
+// unsigned int  VideoReader::width() const { return hnd.get(CV_CAP_PROP_FRAME_WIDTH);}
+// unsigned int  VideoReader::height() const { return hnd.get(CV_CAP_PROP_FRAME_HEIGHT);}
+// unsigned int VideoReader::frames() const { return hnd.get(CV_CAP_PROP_FRAME_COUNT);}
+// unsigned int VideoReader::frame() const { return hnd.get(CV_CAP_PROP_POS_FRAMES);}
+
+unsigned int  VideoReader::width() const { return hnd.get(CAP_PROP_FRAME_WIDTH);}
+unsigned int  VideoReader::height() const { return hnd.get(CAP_PROP_FRAME_HEIGHT);}
+unsigned int VideoReader::frames() const { return hnd.get(CAP_PROP_FRAME_COUNT);}
+unsigned int VideoReader::frame() const { return hnd.get(CAP_PROP_POS_FRAMES);}
 
 // >> 表示在流中取出1帧
 VideoReader& VideoReader::operator >> (cv::Mat& matrix) {
@@ -32,7 +40,9 @@ VideoReader& VideoReader::operator >> (cv::Mat& matrix) {
 
 
 VideoWriter::VideoWriter(std::string fn, const int width, const int height, const float fps) {
-  codec = CV_FOURCC('m', 'p', '4', 'v');
+  // codec = CV_FOURCC('m', 'p', '4', 'v');
+  codec = VideoWriter::fourcc('m', 'p', '4', 'v');
+  
   cv::Size S = cv::Size(width, height);
   std::cout << "write video " << fn << std::endl
             << "  fps:    " << fps << std::endl
