@@ -28,10 +28,10 @@ int main(int argc, char const *argv[])
 
     cv::Mat before_frame, sharp_frame, after_frame;
     video >> sharp_frame; // 1
-    sharp_frame = scale(sharp_frame, scaling_factor);
+    // sharp_frame = scale(sharp_frame, scaling_factor);
 
     video >> after_frame; // 2
-    after_frame = scale(after_frame, scaling_factor);
+    // after_frame = scale(after_frame, scaling_factor);
 
     // 计算相隔两帧间的光流，存入motion
     Flow before_flow, after_flow;
@@ -53,7 +53,7 @@ int main(int argc, char const *argv[])
         sharp_frame = after_frame.clone(); // sharp_frame：2
 
         video >> after_frame; // after_frame：3
-        after_frame = scale(after_frame, scaling_factor);
+        // after_frame = scale(after_frame, scaling_factor);
 
         // estimate FLOW
         before_flow.compute(sharp_frame, before_frame);
