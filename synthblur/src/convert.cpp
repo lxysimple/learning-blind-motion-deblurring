@@ -81,7 +81,7 @@ int main(int argc, char const *argv[])
         // cv::imwrite("/home/lxy/桌面/Blur/"+ std::to_string(k) +".png", blurry_frame);
         // cv::imwrite("/home/lxy/桌面/Sharp/"+ std::to_string(k) +".png", sharp_frame);
 
-        std::cout << k << " / "<< k_e << std::endl;
+        std::cout << k << " / "<< k_e-1 << std::endl;
           
    
     }
