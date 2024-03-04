@@ -27,28 +27,32 @@ int main(int argc, char const *argv[])
     std::cout << "simulate video with " << video.fps() * (1 + steps) << " fps" << std::endl;
 
     cv::Mat before_frame, sharp_frame, after_frame;
-    video >> sharp_frame; 
+    video >> sharp_frame; // 0
     sharp_frame = scale(sharp_frame, scaling_factor);
 
-    video >> after_frame; 
+    video >> after_frame; // 1
     after_frame = scale(after_frame, scaling_factor);
 
     // 计算相隔两帧间的光流，存入motion
     Flow before_flow, after_flow;
-    before_flow.compute(sharp_frame, after_frame);
+    before_flow.compute(sharp_frame, after_frame); // 0~1 flow
 
-    VideoWriter blurry_video(video_path + "_blurry.mp4", video.width() * scaling_factor, video.height() * scaling_factor, video.fps());
-    VideoWriter sharp_video(video_path + "_sharp.mp4", video.width() * scaling_factor, video.height() * scaling_factor, video.fps());
-    VideoWriter flow_video(video_path + "_flow.mp4", video.width() * scaling_factor, video.height() * scaling_factor, video.fps());
+    // VideoWriter blurry_video(video_path + "_blurry.mp4", video.width() * scaling_factor, video.height() * scaling_factor, video.fps());
+    // VideoWriter sharp_video(video_path + "_sharp.mp4", video.width() * scaling_factor, video.height() * scaling_factor, video.fps());
+    // VideoWriter flow_video(video_path + "_flow.mp4", video.width() * scaling_factor, video.height() * scaling_factor, video.fps());
 
     // this is a re-write of the ugly RingBuffer implementation and does the job as well.
-    for (int k = 0, k_e = video.frames() - 2; k < k_e; ++k) {
+    // for (int k = 0, k_e = video.frames() - 2; k < k_e; ++k) {
+
+      // 序号0和序号video.frames()-1 都被废弃
+      // 为啥<=frames-2，因为之前已经加载2帧了，所以最多再额外加载frames-2帧
+      for (int k = 1, k_e = video.frames() - 2; k <= k_e; ++k) { // k代表当前帧
 
         // cyclic get frames
-        before_frame = sharp_frame.clone();
-        sharp_frame = after_frame.clone();
+        before_frame = sharp_frame.clone(); // before_frame：0
+        sharp_frame = after_frame.clone(); // sharp_frame：1
 
-        video >> after_frame; 
+        video >> after_frame; // after_frame：2
         after_frame = scale(after_frame, scaling_factor);
 
         // estimate FLOW
@@ -69,9 +73,12 @@ int main(int argc, char const *argv[])
         cv::Mat blurry_frame = getMean(subframes);
 
         // write to video
-        blurry_video << blurry_frame;
-        sharp_video << sharp_frame;
-        flow_video << before_flow.visualize();
+        // blurry_video << blurry_frame;
+        // sharp_video << sharp_frame;
+        // flow_video << before_flow.visualize();
+
+        cv::imwrite('/home/lxy/桌面/blur/'+ k +'.png', blurry_frame)
+        cv::imwrite('/home/lxy/桌面/sharp/'+ k +'.png', sharp_frame)
 
         std::cout << k << " / "<< k_e << std::endl;
           
