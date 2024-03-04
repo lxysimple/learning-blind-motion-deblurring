@@ -37,8 +37,8 @@ int main(int argc, char const *argv[])
     Flow before_flow, after_flow;
     before_flow.compute(sharp_frame, after_frame); // 1~2 flow
 
-    // VideoWriter blurry_video(video_path + "_blurry.mp4", video.width() * scaling_factor, video.height() * scaling_factor, video.fps());
-    // VideoWriter sharp_video(video_path + "_sharp.mp4", video.width() * scaling_factor, video.height() * scaling_factor, video.fps());
+    VideoWriter blurry_video(video_path + "_blurry.mp4", video.width() * scaling_factor, video.height() * scaling_factor, video.fps());
+    VideoWriter sharp_video(video_path + "_sharp.mp4", video.width() * scaling_factor, video.height() * scaling_factor, video.fps());
     // VideoWriter flow_video(video_path + "_flow.mp4", video.width() * scaling_factor, video.height() * scaling_factor, video.fps());
 
     // this is a re-write of the ugly RingBuffer implementation and does the job as well.
@@ -73,12 +73,13 @@ int main(int argc, char const *argv[])
         cv::Mat blurry_frame = getMean(subframes);
 
         // write to video
-        // blurry_video << blurry_frame;
-        // sharp_video << sharp_frame;
+        // 视频体积更小
+        blurry_video << blurry_frame;
+        sharp_video << sharp_frame;
         // flow_video << before_flow.visualize();
 
-        cv::imwrite("/home/lxy/桌面/Blur/"+ std::to_string(k) +".png", blurry_frame);
-        cv::imwrite("/home/lxy/桌面/Sharp/"+ std::to_string(k) +".png", sharp_frame);
+        // cv::imwrite("/home/lxy/桌面/Blur/"+ std::to_string(k) +".png", blurry_frame);
+        // cv::imwrite("/home/lxy/桌面/Sharp/"+ std::to_string(k) +".png", sharp_frame);
 
         std::cout << k << " / "<< k_e << std::endl;
           
