@@ -17,7 +17,7 @@ int main(int argc, char const *argv[])
     }
     std::string video_path = argv[1];
 
-    const int steps = 2; // 在两帧间基于光流生成20个子帧
+    const int steps = 20; // 在两帧间基于光流生成20个子帧
     const float scaling_factor = 0.5; // 每帧尺寸缩小一半
 
     // 距离中心帧越远，其基于光流变化越大
