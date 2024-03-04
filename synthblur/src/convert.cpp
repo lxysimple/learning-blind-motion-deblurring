@@ -77,8 +77,8 @@ int main(int argc, char const *argv[])
         // sharp_video << sharp_frame;
         // flow_video << before_flow.visualize();
 
-        cv::imwrite("/home/lxy/桌面/blur/"+ to_string(k) +".png", blurry_frame)
-        cv::imwrite("/home/lxy/桌面/sharp/"+ to_string(k) +".png", sharp_frame)
+        cv::imwrite("/home/lxy/桌面/blur/"+ std::to_string(k) +".png", blurry_frame)
+        cv::imwrite("/home/lxy/桌面/sharp/"+ std::to_string(k) +".png", sharp_frame)
 
         std::cout << k << " / "<< k_e << std::endl;
           
