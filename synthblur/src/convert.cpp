@@ -8,7 +8,7 @@
 #include "video.h"
 
 
-""" 生成sharp、blur视频，每个视频的帧比原视频少两帧，分别是第1帧和最后1帧 """
+// 生成sharp、blur视频，每个视频的帧比原视频少两帧，分别是第1帧和最后1帧 
 int main(int argc, char const *argv[])
 {
     if (argc < 2) {
