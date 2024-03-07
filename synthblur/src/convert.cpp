@@ -41,8 +41,10 @@ int main(int argc, char const *argv[])
     // VideoWriter blurry_video(video_path + "_blurry.mp4", video.width() * scaling_factor, video.height() * scaling_factor, video.fps());
     // VideoWriter sharp_video(video_path + "_sharp.mp4", video.width() * scaling_factor, video.height() * scaling_factor, video.fps());
     // VideoWriter flow_video(video_path + "_flow.mp4", video.width() * scaling_factor, video.height() * scaling_factor, video.fps());
+    
+    VideoWriter flow_video(video_path + "_flow.mp4", video.width() , video.height() , video.fps());
     VideoWriter blurry_video(video_path + "_blurry.mp4", video.width() , video.height() , video.fps());
-    // VideoWriter sharp_video(video_path + "_sharp.mp4", video.width() , video.height() , video.fps());
+    VideoWriter sharp_video(video_path + "_sharp.mp4", video.width() , video.height() , video.fps());
 
     // this is a re-write of the ugly RingBuffer implementation and does the job as well.
     // for (int k = 0, k_e = video.frames() - 2; k < k_e; ++k) {
