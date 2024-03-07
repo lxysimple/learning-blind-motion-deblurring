@@ -22,10 +22,10 @@ int main(int argc, char const *argv[])
 
     // 距离中心帧越远，其基于光流变化越大
     // std::vector<float> ratios_before = linspace(1., 0., steps); 
-    std::vector<float> ratios_before = linspace(1., 1., steps); 
+    std::vector<float> ratios_before = linspace(1., 0.5, steps); 
     ratios_before.pop_back();
     // std::vector<float> ratios_after = linspace(0., 1., steps); 
-    std::vector<float> ratios_after = linspace(1., 1., steps); 
+    std::vector<float> ratios_after = linspace(0.5, 1., steps); 
     pop_front(ratios_after);
 
     VideoReader video(video_path);
