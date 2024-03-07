@@ -23,10 +23,10 @@ int main(int argc, char const *argv[])
     // 权重系数表示影子偏移的距离，不同偏移量的多个影子叠加形成了模糊的效果
     // 距离中心帧越远，其基于光流变化越大
     // std::vector<float> ratios_before = linspace(1., 0., steps); 
-    std::vector<float> ratios_before = linspace(2., 0, steps); 
+    std::vector<float> ratios_before = linspace(2., 0., steps); 
     ratios_before.pop_back();
     // std::vector<float> ratios_after = linspace(0., 1., steps); 
-    std::vector<float> ratios_after = linspace(0, 2., steps); 
+    std::vector<float> ratios_after = linspace(0., 2., steps); 
     pop_front(ratios_after);
 
     VideoReader video(video_path);
