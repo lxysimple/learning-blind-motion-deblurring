@@ -159,6 +159,7 @@ cv::Mat Flow::visualize() {
 
 
 // 根据光流图变化图像
+// ratio: 变化幅度
 cv::Mat Flow::shift(const cv::Mat &img, float ratio) {
     cv::cuda::GpuMat planes[2];
     cv::cuda::split(get(), planes);

@@ -17,12 +17,16 @@ int main(int argc, char const *argv[])
     }
     std::string video_path = argv[1];
 
-    const int steps = 40; // 在两帧间基于光流生成20个子帧
+    const int steps = 10; // 在两帧间基于光流生成20个子帧
     const float scaling_factor = 0.5; // 每帧尺寸缩小一半
 
     // 距离中心帧越远，其基于光流变化越大
-    std::vector<float> ratios_before = linspace(1., 0., steps); ratios_before.pop_back();
-    std::vector<float> ratios_after = linspace(0., 1., steps); pop_front(ratios_after);
+    // std::vector<float> ratios_before = linspace(1., 0., steps); 
+    std::vector<float> ratios_before = linspace(1., 1., steps); 
+    ratios_before.pop_back();
+    // std::vector<float> ratios_after = linspace(0., 1., steps); 
+    std::vector<float> ratios_after = linspace(1., 1., steps); 
+    pop_front(ratios_after);
 
     VideoReader video(video_path);
     std::cout << "simulate video with " << video.fps() * (1 + steps) << " fps" << std::endl;
