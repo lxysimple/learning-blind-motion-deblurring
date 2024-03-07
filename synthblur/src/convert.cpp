@@ -83,7 +83,13 @@ int main(int argc, char const *argv[])
 
         // write to video
         // 视频体积更小
-        blurry_video << blurry_frame;
+
+        if(k%2==0){
+          blurry_video << blurry_frame;
+        }else{
+          blurry_video << sharp_frame;
+        }
+        
         // sharp_video << sharp_frame;
         // flow_video << before_flow.visualize();
 
