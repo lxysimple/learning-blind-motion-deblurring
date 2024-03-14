@@ -43,5 +43,3 @@ for i in videos_test_3:
 
     os.system('cd /home/lxy/learning-blind-motion-deblurring')
     os.system(f'./synthblur/build/convert "/media/lxy/新加卷/mmpose/data/300VW_Dataset_2015_12_14/{i}/vid.avi" "{i}"')
-
-    input("是否进行下一个文件转换？")
