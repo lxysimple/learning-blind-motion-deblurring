@@ -16,6 +16,7 @@ int main(int argc, char const *argv[])
         return 0;
     }
     std::string video_path = argv[1];
+    std::string video_id = argv[2];
 
     const int steps = 20; // 10 在两帧间基于光流生成20个子帧
     const float scaling_factor = 0.5; // 每帧尺寸缩小一半
@@ -48,7 +49,7 @@ int main(int argc, char const *argv[])
     // VideoWriter flow_video(video_path + "_flow.mp4", video.width() * scaling_factor, video.height() * scaling_factor, video.fps());
     
     // VideoWriter flow_video(video_path + "_flow.mp4", video.width() , video.height() , video.fps());
-    VideoWriter blurry_video(video_path + "_blurry.mp4", video.width() , video.height() , video.fps());
+    // VideoWriter blurry_video(video_path + "_blurry.mp4", video.width() , video.height() , video.fps());
     // VideoWriter sharp_video(video_path + "_sharp.mp4", video.width() , video.height() , video.fps());
 
     // this is a re-write of the ugly RingBuffer implementation and does the job as well.
@@ -92,12 +93,11 @@ int main(int argc, char const *argv[])
         // sharp_video << sharp_frame;
         // flow_video << before_flow.visualize();
 
-        // cv::imwrite("/home/lxy/桌面/Blur/"+ std::to_string(k) +".png", blurry_frame);
+        cv::imwrite("/media/lxy/新加卷/Ubuntu/300vw_myblur/" + video_id + std::to_string(k) +".png", blurry_frame);
         // cv::imwrite("/home/lxy/桌面/Sharp/"+ std::to_string(k) +".png", sharp_frame);
 
-        std::cout << k << " / "<< k_e-1 << std::endl;
+        std::cout << k << " / "<< k_e << std::endl;
           
-   
     }
 
     return 0;
