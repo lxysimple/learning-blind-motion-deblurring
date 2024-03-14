@@ -87,7 +87,7 @@ int main(int argc, char const *argv[])
         // 视频体积更小
 
         
-        blurry_video << blurry_frame;
+        // blurry_video << blurry_frame;
         
         
         // sharp_video << sharp_frame;
