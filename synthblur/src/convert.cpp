@@ -91,7 +91,7 @@ int main(int argc, char const *argv[])
         // sharp_video << sharp_frame;
         // flow_video << before_flow.visualize();
 
-        cv::imwrite("/media/lxy/新加卷/Ubuntu/300vw_myblur/" + video_id + std::to_string(k) +".png", blurry_frame);
+        cv::imwrite("/media/lxy/新加卷/Ubuntu/300vw_myblur/" + video_id + "/" + std::to_string(k) +".png", blurry_frame);
         // cv::imwrite("/home/lxy/桌面/Sharp/"+ std::to_string(k) +".png", sharp_frame);
 
         std::cout << k << " / "<< k_e << std::endl;
