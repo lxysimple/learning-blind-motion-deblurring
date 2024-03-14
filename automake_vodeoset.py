@@ -41,7 +41,7 @@ videos_train = [ i for i in videos_all if i not in videos_test_1
 
 for i in videos_test_3:
 
-    pic_dir = f"/media/lxy/新加卷/mmpose/data/300VW_Dataset_2015_12_14/{i}"
+    pic_dir = f"/media/lxy/新加卷/mmpose/data/300VW_Dataset_2015_12_14/{i}/"
     if not os.path.exists(pic_dir):
         os.makedirs(pic_dir)
 
