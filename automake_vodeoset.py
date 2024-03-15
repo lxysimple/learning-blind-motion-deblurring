@@ -39,7 +39,7 @@ videos_train = [ i for i in videos_all if i not in videos_test_1
                                         and i not in videos_test_3]
 
 
-for i in videos_test_3:
+for i in videos_test_1:
 
     pic_dir = f"/media/lxy/新加卷/Ubuntu/300vw_myblur/{i}"
     if not os.path.exists(pic_dir):
